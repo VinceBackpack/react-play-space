@@ -1,25 +1,24 @@
 import './App.css';
-
+import { GetList } from './services/fetchAPI';
+import { Banner } from './components/Banner';
 
 function App() {
+
+
   return (
     <div className="App">
       Hello to the main page!
-      {/* { <header className="App-header">
-        { <img src={logo} className="App-logo" alt="logo" /> }
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      // </header> } */}
+      <Banner 
+        purpose="Rent A Home"
+        title="Rental homes for everyone"
+        desc="description"
+        buttonText="Explore Renting"
+        linkName="/search?purpose=for-rent"
+        imageUrl="https://mybayutcdn.bayut.com/mybayut/wp-content/uploads/emirates-13.jpg"
+      />
       
+      {/* <GetList /> */}
+
     </div>
   );
 }
