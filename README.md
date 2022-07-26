@@ -4,6 +4,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Using Styled Components
+
+This project uses styled components make sure you install style components:
+# with npm
+npm install --save styled-components
+# with yarn
+yarn add styled-components
+
+# Uses Router-Dom
+# with npm
+npm install react-router-dom
+# with yarn
+yarn add react-router-dom
+
 ## Available Scripts
 
 In the project directory, you can run:
