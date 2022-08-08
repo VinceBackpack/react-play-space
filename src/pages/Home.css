@@ -1,0 +1,7 @@
+.homepage{
+    display: flex;
+    justify-content: center;
+    background-color: bisque;
+    height: 50rem;
+    width: 100%;
+  }

@@ -1,28 +1,23 @@
 import './App.css';
-import { GetList } from './services/fetchAPI';
-import { Banner } from './components/Banner';
-import { NavBar } from './components/NavBar';
-import { BrowserRouter as Router } from "react-router-dom";
+import { GetList, baseURL } from './services/fetchAPI';
+// import { NavBar } from './components/NavBar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Search, getServerSideProps} from './pages/Search';
+import { Home } from './pages/Home';
 
 function App() {
-
 
   return (
     <div className="App">
       <Router>
-        <NavBar />
-      <Banner 
-        purpose="Rent A Home"
-        title="Rental homes for everyone"
-        desc="description"
-        buttonText="Explore Renting"
-        // linkName="/search?purpose=for-rent"
-        imageUrl="https://mybayutcdn.bayut.com/mybayut/wp-content/uploads/emirates-13.jpg"
-      />
+        <Routes>
+          <Route path="/" element={ <Home /> } exact />
+          <Route path="/search" element={ <Search /> }  />
+        </Routes>
       </Router>
       
-      {/* <GetList /> */}
-
+      {/* <GetList url={baseURL} /> */}
+      <GetList />
     </div>
   );
 }

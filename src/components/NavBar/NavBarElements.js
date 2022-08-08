@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import { Link as LinkR } from 'react-router-dom'
 
 export const Nav = styled.nav`
-    background: grey;
+    background: #bce8ec;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 0;
+    margin: 0px 0px 0px 0px;
     
     @media screen and (max-width: 960px){
         transition: 0.8s all ease;
