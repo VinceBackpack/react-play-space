@@ -18,6 +18,10 @@ npm install react-router-dom
 # with yarn
 yarn add react-router-dom
 
+# Install env cmd
+# with npm
+# npm install env-cmd
+
 ## Available Scripts
 
 In the project directory, you can run:
