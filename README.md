@@ -20,7 +20,7 @@ yarn add react-router-dom
 
 # Install env cmd
 # with npm
-# npm install env-cmd
+npm install env-cmd
 
 ## Available Scripts
 
