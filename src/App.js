@@ -16,8 +16,8 @@ function App() {
         </Routes>
       </Router>
       
-      {/* <GetList url={baseURL} /> */}
-      <GetList />
+      
+      
     </div>
   );
 }

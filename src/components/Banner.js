@@ -10,7 +10,7 @@ export const Banner = ({purpose, title, desc, buttonText, linkName, imageUrl}) =
         <h2>{title}</h2>
         <p>{desc}</p>
         <button>
-          <Link to="/">{buttonText} </Link>
+          <Link to={linkName}>{buttonText} </Link>
         </button>
       </div>
     </div>

@@ -4,16 +4,32 @@ import { NavBar } from '../components/NavBar';
 import { SearchFilters } from '../components/SearchFilter';
 import { GetList, baseURL } from '../services/fetchAPI';
 import { Property } from '../components/Property';
-import { getByTitle } from '@testing-library/react';
+import { useSearchParams } from 'react-router-dom';
 
 
 
 export const Search = () => {
     const [searchFilters, setSearchFilters] = useState(false);
-    //const [property, setProperty] = useState();
+    const [searchParams] = useSearchParams();
     
-    const properties = getServerSideProps();
+    //const properties = getServerSideProps( searchParams);
     
+    const locationExternalIDs = searchParams.get("locationExternalIDs") || '5002%2C6020';
+    const categoryExternalID = searchParams.get("categoryExternalID") || '4';
+    const purpose = searchParams.get("purpose") || 'for-rent';
+    const priceMin = searchParams.get("priceMin") || '0';
+    const priceMax = searchParams.get("priceMa") || '1000000';
+    const roomsMin = searchParams.get("roomsMin") || '1';
+    const bathsMin = searchParams.get("bathsMin") || '1';
+    const areaMax = searchParams.get("areaMax") || '35000';
+    const rentFrequency = searchParams.get("rentFrequency") || 'yearly';
+    const hitsPerPage = searchParams.get("hitsPerPage") || '25';
+
+    const properties = GetList(`${baseURL}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&hitsPerPage=${hitsPerPage}`);
+
+    
+    //const pur = new URLSearchParams(document.location.search);
+    console.log("pur: " + searchParams);
     // const properties = async () =>{
     //     const { prop } = await getServerSideProps();
     //     setProperty(prop);
@@ -26,117 +42,44 @@ export const Search = () => {
     //this.state.properties.map((item) => {item.title})
     // const obj = { purpose: "for-rent", title: "title here"}
 
-    if(properties){
-        return <p> Loading... </p>
+
+    const propertiesLoaded = () => {
+        if(properties.length === 0){
+            return (<div> Loading Data </div>)
+        }
+        else{
+            return (Object.keys(properties?.hits).map((item, key) => <Property property={ Object(properties?.hits[item])} key={key} /> ));
+        }
+
     }
+    
+    if(!properties){
+        return (<p> Loading... </p>);
+    }
+
     return (
         <>
         <div>
             <NavBar/>
             <h1>Search</h1>
             {/* <GetList /> */}
-            <div>
-                properties
-                <p>
+            <div style={{ display:'flex', flexWrap: 'wrap' , padding: '5% 5% 5% 5%'}}>
+                
+                
                     {/* Working */}
-                { Object.keys(properties?.hits).map((item, key) => <Property property={ Object(properties?.hits[item])} key={key} /> )}
+                {/* { Object.keys(properties?.hits).map((item, key) => <Property property={ Object(properties?.hits[item])} key={key} /> )} */}
 
-                {/* {properties} */}
+                {propertiesLoaded()}
 
-                {/* { Object.keys(properties).map((prop) => { return (<Property property={prop} keys={prop.id} />)})} */}
-
-
-
-                {/* { Object.keys(properties?.hits).map((item) => <Property property={ Object(properties?.hits[item])} key={properties?.hits} /> )} */}
-
-                
-
-                {/* <Property property={ Object(properties?.hits[0])} key={properties?.hits} /> */}
-
-                {/* {<Property property={obj} keys={obj.id}/>} */}
-
-                </p>
-                {/* { Object.values(properties).map((property) => {
-                    return (
-                    <p> {property.map ((items) => {
-                        return (
-                            <p>{items.id} </p>
-                        )
-                    })} </p> )
-                })} */}
-                
-
-                {/* { Array.isArray(properties) ? properties.map((property) => <Property property={property} key={property.id} /> ) : null } */}
-
-                {/* <div>
-                    {Array.isArray(JSON.stringify(properties)) ? properties.map((property, index) => {
-                    return (
-                    <div key={index}>
-                        <h2>name: {property.coverPhoto}</h2>
-                        {console.log("cover photo: " + property.value) }
-                        <h2>country: {property.id}</h2>
-
-                        
-                        </div>
-                        );
-                    }): "properties null" }
-                </div> */}
-                
-
-                {/* {properties.map((item, index) =>  <p>Purpose:  {item}</p>)} */}
-                
-                {/* <Property title={JSON.stringify(properties.props.properties)}/> */}
-                {/* {properties.map((properties) => properties) } */}
             </div>
             {/* { properties.map((property) => <Property property={property} key={property.id} /> )} */}
             <div className='searchedDisplay' onClick={() => setSearchFilters((prevFilters)=> !prevFilters)}>
                 Filter Search
             </div>
-            {/* { properties.length === 0 && (
-                <img src='/'/>
-            )} */}
+            
+            
             { searchFilters && <SearchFilters /> }
         </div>
         </>
     );
-}
-
-//  function getServerSideProps({ query }){
-//     const locationExternalIDs = query.locationExternalIDs || '5002%2C6020';
-//     const categoryExternalID = query.categoryExternalID || '4';
-//     const purpose = query.purpose || 'for-rent';
-//     const priceMin = query.priceMin || '0';
-//     const priceMax = query.priceMax || '1000000';
-//     const roomsMin = query.roomsMin || '1';
-//     const bathsMin = query.bathsMin || '1';
-//     const areaMax = query.areaMax || '35000';
-//     const rentFrequency = query.rentFrequency || 'yearly';
-//     const hitsPerPage = query.hitsPerPage || '25';
-
-function getServerSideProps() {
-    const locationExternalIDs = '5002';
-    const categoryExternalID = '4';
-    const purpose = 'for-rent';
-    const priceMin = '0';
-    const priceMax = '1000000';
-    const roomsMin = '1';
-    const bathsMin =  '1';
-    const areaMax = '35000';
-    const rentFrequency =  'yearly';
-    const hitsPerPage = '6';
-    
-    const data = GetList(`${baseURL}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&hitsPerPage=${hitsPerPage}`);
-    
-    // if(!data){
-    //     console.log("empty: " + data);
-    // }
-//console.log("before return search: " + JSON.stringify(data), null, 2);
-
-
-return data;
-// return {
-//     props: {
-//         properties: data?.hits
-//     }
-// };
 }
