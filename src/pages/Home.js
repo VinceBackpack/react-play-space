@@ -2,6 +2,7 @@ import './Home.css';
 import React from "react";
 import { NavBar } from '../components/NavBar';
 import { Banner } from '../components/Banner';
+import { Footer } from '../components/Footer/Footer';
 
 export const Home = () => {
     return(
@@ -26,6 +27,7 @@ export const Home = () => {
                 imageUrl="https://upload.wikimedia.org/wikipedia/commons/e/e1/Zwicker_House_%E2%80%93_Lunenburg%2C_NS_%E2%80%93_%282018-08-29%29.jpg"
             />
             </div>
+            <Footer />
          </div>
     );
 }
