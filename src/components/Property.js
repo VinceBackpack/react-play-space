@@ -1,5 +1,5 @@
 
-export const Property = ({ property: { purpose, title, coverPhoto, price, rentFrequency, rooms, baths, area, furnishingStatus }}) => (
+export const Property = ({ property: { purpose, title, coverPhoto, price }}) => (
     <div>
         <div style={{ width:"400px"}}>
             <img src={coverPhoto.url} width={250} height={250} alt="no image"/>
