@@ -19,5 +19,7 @@ In the .env.local set 2 global variables
 To Build and run the project
 
 Step #3
+
 npm run build
+
 npm start
