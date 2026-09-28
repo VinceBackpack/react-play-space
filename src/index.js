@@ -5,9 +5,9 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode> Remove for testing to prevent extra API calls
     <App />
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 
