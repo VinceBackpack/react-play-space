@@ -1,0 +1,147 @@
+.search-page {
+    min-height: 100vh;
+    background: #f7f9fb;
+    color: #12345b;
+}
+
+.search-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 55px 40px 80px;
+}
+
+/* SEARCH HEADER */
+
+.search-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 45px;
+}
+
+.search-eyebrow {
+    margin: 0 0 12px;
+    color: #2476b9;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.search-header h1 {
+    margin: 0;
+    color: #12345b;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.05;
+}
+
+.search-description {
+    max-width: 550px;
+    margin: 18px 0 0;
+    color: #667789;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* FILTER BUTTON */
+
+.filter-button {
+    flex-shrink: 0;
+    padding: 13px 22px;
+    border: 1px solid #12345b;
+    background: #12345b;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.filter-button:hover {
+    background: #1d568b;
+    transform: translateY(-2px);
+}
+
+/* FILTER AREA */
+
+.filters-container {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #e4eaf0;
+}
+
+/* RESULTS HEADER */
+
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.results-header h2 {
+    margin: 0;
+    color: #12345b;
+    font-size: 24px;
+}
+
+.results-header span {
+    color: #7a8998;
+    font-size: 13px;
+}
+
+/* PROPERTY GRID */
+
+.property-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* LOADING */
+
+.search-loading {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #667789;
+    font-size: 15px;
+}
+
+/* TABLET */
+
+@media screen and (max-width: 1000px) {
+
+    .property-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 700px) {
+
+    .search-main {
+        padding: 40px 20px 60px;
+    }
+    .search-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 35px;
+    }
+    .filter-button {
+        width: 100%;
+    }
+    .property-grid {
+        grid-template-columns: 1fr;
+    }
+    .results-header h2 {
+        font-size: 20px;
+    }
+}

@@ -1,52 +1,113 @@
 import { useState } from 'react';
 import { NavBar } from '../components/NavBar';
-import { SearchFilters } from '../components/SearchFilter';
+import { SearchFilter } from '../components/SearchFilter';
 import { GetList, baseURL } from '../services/fetchAPI';
 import { Property } from '../components/Property';
 import { useSearchParams } from 'react-router-dom';
+import './Search.css';
 
 export const Search = () => {
-    const [searchFilters, setSearchFilters] = useState(false);
+    const [searchFilter, setSearchFilter] = useState(false);
     const [searchParams] = useSearchParams();
-    
-    const locationExternalIDs = searchParams.get("locationExternalIDs") || '5002%2C6020';
-    const purpose = searchParams.get("purpose") || 'for-rent';
-    const hitsPerPage = searchParams.get("hitsPerPage") || '25';
 
-    const properties = GetList(`${baseURL}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&hitsPerPage=${hitsPerPage}`);
+    const locationIds =
+        searchParams.get('location_ids') || '6901,5003'; //Default location id
 
+    const purpose =
+        searchParams.get('purpose') || 'for-rent';
 
-    const propertiesLoaded = () => {
-        if(properties.length === 0){
-            return (<div> Loading Data </div>)
-        }
-        else{
-            return (Object.keys(properties?.hits).map((item, key) => <Property property={ Object(properties?.hits[item])} key={key} /> ));
-        }
+    const url =
+        `${baseURL}/search-property` +
+        `?sort_order=popular` +
+        `&property_type=apartments,villas` +
+        `&page=1` +
+        `&langs=en` +
+        `&location_ids=${locationIds}` +
+        `&purpose=${purpose}`;
 
+    const response = GetList(url);
+
+    console.log('Search response:', response);
+
+    // API is still loading
+    if (!response) {
+        return (
+            <div className='search-page'>
+                <NavBar />
+                <main className='search-main'>
+                    <div className='search-loading'>
+                        Loading properties...
+                    </div>
+                </main>
+            </div>
+        );
     }
-    
-    if(!properties){
-        return (<p> Loading... </p>);
-    }
 
+    // Get the actual property array
+    const properties = response?.data?.properties || [];
     return (
-        <>
-        <div>
-            <NavBar/>
-            <h1>Search</h1>
-            {/* <GetList /> */}
-            <div style={{ display:'flex', flexWrap: 'wrap' , padding: '5% 5% 5% 5%'}}>
+        <div className='search-page'>
+            <NavBar />
+            <main className='search-main'>
+                <section className='search-header'>
+                    <div>
+                        <p className='search-eyebrow'>
+                            UAE REAL ESTATE
+                        </p>
+                        <h1>
+                            {purpose === 'for-sale'
+                                ? 'Properties for Sale'
+                                : 'Properties for Rent'}
+                        </h1>
+                        <p className='search-description'>
+                            Browse available properties and find your
+                            next home.
+                        </p>
+                    </div>
 
-                {propertiesLoaded()}
+                    <button
+                        className='filter-button'
+                        onClick={() =>
+                            setSearchFilter(prev => !prev)
+                        }
+                    >
+                        {searchFilter
+                            ? 'Hide Filters'
+                            : 'Filter Search'}
+                    </button>
+                </section>
+                {searchFilter && (
+                    <div className='filters-container'>
+                        <SearchFilter />
+                    </div>
+                )}
 
-            </div>
-            <div className='searchedDisplay' onClick={() => setSearchFilters((prevFilters)=> !prevFilters)}>
-                Filter Search
-            </div>
-            
-            { searchFilters && <SearchFilters /> }
+                <section className='search-results'>
+
+                    <div className='results-header'>
+                        <h2>
+                            Available Properties
+                        </h2>
+                        <span>
+                            {properties.length} properties
+                        </span>
+                    </div>
+                    <div className='property-grid'>
+                        {properties.length > 0 ? (
+                            properties.map((property) => (
+                                <Property
+                                    property={property}
+                                    key={property.id}
+                                />
+                            ))
+                        ) : (
+                            <div className='no-properties'>
+                                No properties found.
+                            </div>
+                        )}
+                    </div>
+                </section>
+            </main>
         </div>
-        </>
     );
-}
+};

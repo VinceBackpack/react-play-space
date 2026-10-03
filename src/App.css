@@ -1,10 +1,37 @@
 .App {
-  position: relative;
-  text-align: center;
-  /* background-color: #ecc0bc; */
-  height: 100%;
+    min-height: 100vh;
+    width: 100%;
 }
-body{
-  /*body default has 8px of white border*/
-  margin: 0;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    background: #ffffff;
+    color: #12345b;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+select {
+    font: inherit;
 }
