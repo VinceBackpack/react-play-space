@@ -1,7 +1,206 @@
-.homepage{
+.home {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    color: #12345b;
+}
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 100%;
+    max-width: 1400px;
+    min-height: 500px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    background: #f4f7fa;
+}
+
+.hero-content {
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 70px;
+}
+
+.hero-eyebrow {
+    margin: 0 0 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2c72b8;
+}
+
+.hero-content h1 {
+    margin: 0;
+    font-size: clamp(48px, 5vw, 72px);
+    line-height: 0.98;
+    font-weight: 700;
+    color: #12345b;
+}
+
+.hero-description {
+    margin: 28px 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #526477;
+}
+
+.hero-button {
+    width: fit-content;
+    padding: 14px 24px;
+    background: #12345b;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.hero-button:hover {
+    background: #1d568b;
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    width: 58%;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* =========================
+   FEATURED LISTINGS
+========================= */
+
+.featured {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 40px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #12345b;
+}
+
+.section-header a {
+    color: #2476b9;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.section-header a:hover {
+    text-decoration: underline;
+}
+
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    width: 100%;
     display: flex;
     justify-content: center;
-    background-color: bisque;
-    height: 50rem;
-    width: 100%;
-  }
+    align-items: center;
+    border-top: 1px solid #e4eaf0;
+    border-bottom: 1px solid #e4eaf0;
+    background: #f7fafc;
+}
+
+.feature {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 25px;
+    color: #234a6e;
+}
+
+.feature:not(:last-child) {
+    border-right: 1px solid #dce4eb;
+}
+
+.feature span {
+    font-size: 23px;
+}
+
+.feature p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .hero {
+        flex-direction: column-reverse;
+    }
+    .hero-content {
+        width: 100%;
+        padding: 50px 30px;
+    }
+    .hero-image {
+        width: 100%;
+        height: 350px;
+    }
+    .listing-grid {
+        grid-template-columns: 1fr;
+    }
+    .features {
+        flex-direction: column;
+    }
+    .feature {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+    }
+    .feature:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #dce4eb;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .featured {
+        padding: 50px 20px;
+    }
+    .hero-content h1 {
+        font-size: 46px;
+    }
+    .section-header h2 {
+        font-size: 23px;
+    }
+}
